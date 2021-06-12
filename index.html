@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<div class="main">
+  <h1>LIVE COVID 19 TRACKER</h1>
+  <div id="htmlappend"></div>
+</div>
+
+<script>
+  const coronaData = async () => {
+    let request = await fetch("https://api.covid19api.com/summary");
+    let data = await request.json();
+    console.log(data);
+    const html = `<h3>DATE : <span>${data.Date}</span></h3>
+  <div class="container">
+    <div class="elements">
+      <h2>NEW CONFIRMED</h2>
+      <h5>${data.Global.NewConfirmed}</h5>
+    </div>
+    <div class="elements">
+      <h2>NEW RECOVERED</h2>
+      <h5>${data.Global.NewRecovered}</h5>
+    </div>
+    <div class="elements">
+      <h2>NEW DEATHS</h2>
+      <h5>${data.Global.NewDeaths}</h5>
+    </div>
+    <div class="elements">
+      <h2>TOTAL CONFIRMED</h2>
+      <h5>${data.Global.TotalConfirmed}</h5>
+    </div>
+    <div class="elements">
+      <h2>TOTAL DEATHS</h2>
+      <h5>${data.Global.TotalDeaths}</h5>
+    </div>
+    <div class="elements">
+      <h2>TOTAL RECOVERED</h2>
+      <h5>${data.Global.TotalRecovered}</h5>
+    </div>
+  </div>`;
+
+    document.querySelector("#htmlappend").innerHTML = html;
+  };
+
+  coronaData();
+</script>
